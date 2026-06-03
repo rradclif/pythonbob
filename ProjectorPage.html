@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<link rel="shortcut icon" href="/VVKfavicon.ico" type="image/x-icon" />
+<title>Web control | Projector  </title>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Cache-Control" content="max-age=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Expires" content="Tue, 01 Jan 1990 12:00:00 GMT" />
+
+<link href="/dpjctrl.css" rel="stylesheet" type="text/css" />
+<script src="/showpath.js" type="text/javascript"></script>
+
+</head>
+
+<body oncontextmenu="window.event.returnValue=false;">
+<div id="shadow-one"><div id="shadow-two"><div id="shadow-three"><div id="shadow-four">
+<div id="page">
+
+<div style="padding:0 0 5px 5px"><img src="/VvkLogo.png" alt="web-based, projector control-management" /></div>
+
+<div id="title"><div class="right"><!--Projector Application--></div>&nbsp;</div>
+
+<div id="menu">
+<a id="index" href="/index.html">Projector Status</a>
+<a id="control" href="/PJControl.html">Projector Control</a>
+<a id="crestron" href="/Crestron/PJeControl.html">Crestron &nbsp; RoomView</a>
+<a id="netw" href="/PJNetConfig.html">Network Setup</a>
+<a id="alertmail" href="/PJMailCfg.html">Alert Mail Setup</a>
+</div>
+
+<script language="javascript">
+<!--
+FocusMenu();
+
+function FocusMenu()
+{
+    if( (location.pathname == "/index.html") || (location.pathname == "/"))
+    {
+	document.getElementById('index').style.background="#BBFFFF";
+	document.getElementById('index').style.color="#000000";
+    }
+    else if(location.pathname == "/PJControl.html")
+    {
+	document.getElementById('control').style.background="#BBFFFF";
+	document.getElementById('control').style.color="#000000";
+    }
+    else if(location.pathname == "/PJNetConfig.html")
+    {
+	document.getElementById('netw').style.background="#BBFFFF";
+	document.getElementById('netw').style.color="#000000";
+    }    
+    else if(location.pathname == "/PJMailCfg.html")
+    {
+	document.getElementById('alertmail').style.background="#BBFFFF";
+	document.getElementById('alertmail').style.color="#000000";
+    }
+}
+-->
+</script>
+
+<script language="JavaScript">
+<!--
+
+var powerStatus = 0xff;
+
+function powerOn()
+{
+	exeBtnClick_pjctl('powerOn', '+');
+}
+function powerOff()
+{
+	var res=confirm('Turn off the projector?');
+	if(res==true)
+	{
+		exeBtnClick_pjctl('powerOff', '+');
+	}
+}
+function shutter_blank_Open()
+{
+	exeBtnClick_pjctl('shutterOpen', '+');
+}
+
+function shutter_blank_Close()
+{
+	exeBtnClick_pjctl('shutterClose', '+');
+}
+
+function SrcOnClick(SrcName)
+{
+	exeBtnClick_pjctl(SrcName, '+');
+}
+
+function ZoomOnClick(ZoomIndicator)
+{
+	exeBtnClick_pjctl(ZoomIndicator, '+');
+}
+
+function FocusOnClick(FocusIndicator)
+{
+	exeBtnClick_pjctl(FocusIndicator, '+');
+}
+
+
+
+function ShiftOnClick(ShiftIndicator)
+{
+	exeBtnClick_pjctl(ShiftIndicator, '+');
+}
+
+function PowerStatusUpdate( xml_Data , Id_Data, Id_Data2, newValue )
+{
+	var newPower;
+
+	if( getXMLValue(xml_Data, Id_Data2) == '1' )
+		newPower = 1;
+	else
+		newPower = 0;
+
+	
+	if(powerStatus != newPower)
+	{
+		powerStatus = newPower;
+
+		if(powerStatus == 1)
+		{
+			document.getElementById('Btn_PowerOn').disabled=1;
+			document.getElementById('Btn_PowerOff').disabled=0;
+			document.getElementById('Btn_ShutterOpen').disabled=0;
+			document.getElementById('Btn_ShutterClose').disabled=0;
+			
+			document.getElementById('Btn_Input_HDMI1').disabled=0;
+			document.getElementById('Btn_Input_HDMI2').disabled=0;
+			document.getElementById('Btn_Input_VGA').disabled=0;
+			document.getElementById('Btn_Input_Compoent').disabled=0;
+			document.getElementById('Btn_Input_DVI').disabled=0;
+			//document.getElementById('Btn_Input_DisplayPort').disabled=0;
+			document.getElementById('Btn_Input_HDBT').disabled=0;
+			document.getElementById('Btn_Input_SDI').disabled=0;
+			
+			document.getElementById('Btn_ZoomIn').disabled=0;
+			document.getElementById('Btn_ZoomOut').disabled=0;
+			document.getElementById('Btn_FocusIn').disabled=0;
+			document.getElementById('Btn_FocusOut').disabled=0;			
+			document.getElementById('Btn_ShiftUp').disabled=0;
+			document.getElementById('Btn_ShiftDown').disabled=0;
+			document.getElementById('Btn_ShiftLeft').disabled=0;
+			document.getElementById('Btn_ShiftRight').disabled=0;						
+		}
+		else
+		{
+			document.getElementById('Btn_PowerOn').disabled=0;
+			document.getElementById('Btn_PowerOff').disabled=1;
+			document.getElementById('Btn_ShutterOpen').disabled=1;
+			document.getElementById('Btn_ShutterClose').disabled=1;
+			
+			document.getElementById('Btn_Input_HDMI1').disabled=1;
+			document.getElementById('Btn_Input_HDMI2').disabled=1;
+			document.getElementById('Btn_Input_VGA').disabled=1;
+			document.getElementById('Btn_Input_Compoent').disabled=1;
+			document.getElementById('Btn_Input_DVI').disabled=1;
+			//document.getElementById('Btn_Input_DisplayPort').disabled=1;
+			document.getElementById('Btn_Input_HDBT').disabled=1;
+			document.getElementById('Btn_Input_SDI').disabled=1;
+			
+			document.getElementById('Btn_ZoomIn').disabled=1;
+			document.getElementById('Btn_ZoomOut').disabled=1;
+			document.getElementById('Btn_FocusIn').disabled=1;
+			document.getElementById('Btn_FocusOut').disabled=1;			
+			document.getElementById('Btn_ShiftUp').disabled=1;
+			document.getElementById('Btn_ShiftDown').disabled=1;
+			document.getElementById('Btn_ShiftLeft').disabled=1;
+			document.getElementById('Btn_ShiftRight').disabled=1;	
+		}
+	}
+	
+}
+
+
+// Parses the xmlResponse from PJState.xml and updates the status box
+function updateStatus(xmlData) {
+	
+	//update the projector Power, if value changed, then update field. Or else not necessary update every time.
+	PowerStatusUpdate(xmlData,'PJPowVal', 'pjPowerStatus','PJPowTxtVal' );
+	
+}
+
+newAJAXCommand('PowerStatus.xml', updateStatus, true);
+
+setTimeout("newAJAXCommand('PowerStatus.xml', updateStatus, true)",3000);
+//kick off the AJAX Updater
+setTimeout("pollAJAX()",1000);
+
+-->
+</script>
+
+<div id="content">
+
+	<fieldset>
+
+		<p>Power</p>
+		<p>
+			<input disabled id="Btn_PowerOn" name="Btn_PowerOn" type="button" value="On" style="width:80px" onClick="javascript:powerOn();"/>
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+			<input disabled id="Btn_PowerOff" name="Btn_PowerOff" type="button" value="Off" style="width:80px" onClick="javascript:powerOff();"/>
+		</p>
+
+		<p>Blank</p>
+		<p>
+			<input disabled id="Btn_ShutterOpen" name="Btn_ShutterOpen" type="button" value="Disable" style="width:80px" onClick="javascript:shutter_blank_Open();"/>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+			<input disabled id="Btn_ShutterClose" name="Btn_ShutterClose" type="button" value="Enable" style="width:80px" onClick="javascript:shutter_blank_Close();"/>
+		</p>
+
+		<p>&nbsp;</p>
+
+		<p>Input Selection</p>
+
+		<p>
+			<input disabled id="Btn_Input_HDMI1" name="Btn_Input_HDMI1" type="button" value="HDMI1" style="width:100px" onClick="javascript:SrcOnClick('src_HDMI1');"/>
+			&nbsp;&nbsp;
+			<input disabled id="Btn_Input_HDMI2" name="Btn_Input_HDMI2" type="button" value="HDMI2" style="width:100px" onClick="javascript:SrcOnClick('src_HDMI2');"/>
+			&nbsp;&nbsp;
+			<input disabled id="Btn_Input_VGA" name="Btn_Input_VGA" type="button" value="VGA" style="width:100px" onClick="javascript:SrcOnClick('src_VGA');"/>
+			&nbsp;&nbsp;
+			<input disabled id="Btn_Input_Compoent" name="Btn_Input_Compoent" type="button" value="Component/BNC" style="width:120px" onClick="javascript:SrcOnClick('src_COMP');"/>
+		</p>
+
+		<p>
+			<input disabled id="Btn_Input_DVI" name="Btn_Input_DVI" type="button" value="DVI-D" style="width:100px" onClick="javascript:SrcOnClick('src_DVI');"/>
+			&nbsp;&nbsp;		
+			<input disabled id="Btn_Input_HDBT" name="Btn_Input_HDBT" type="button" value="HDBaseT" style="width:100px" onClick="javascript:SrcOnClick('src_HDBT');"/>
+			&nbsp;&nbsp;
+			<input disabled id="Btn_Input_SDI" name="Btn_Input_SDI" type="button" value="3G-SDI" style="width:100px" onClick="javascript:SrcOnClick('src_SDI');"/>
+		</p>
+	
+	</fieldset>
+
+	<fieldset>		
+		<label> </label>
+		<form id="form3" name="form3" method="post" action="">
+		  <p>Lens Control</p>
+		  <table width="452" border="0" cellspacing="2">
+		    <tr>
+		      <td width="80">&nbsp;&nbsp;&nbsp;&nbsp;Zoom</td>
+		      <td width="80">&nbsp;&nbsp;&nbsp;&nbsp;Focus</td>
+		      <td width="50">&nbsp;</td>
+		      <td width="80">&nbsp;</td>
+		      <td width="80">&nbsp;&nbsp;&nbsp;&nbsp;Shift</td>
+		      <td width="80">&nbsp;</td>
+		    </tr>
+		    <tr>
+		      <td rowspan="2"><input disabled type="button" name="Btn_ZoomIn" id="Btn_ZoomIn" value="IN" style="width:80px" onClick="javascript:ZoomOnClick('ZoomIn');"/></td>
+		      <td rowspan="2"><input disabled type="button" name="Btn_FocusIn" id="Btn_FocusIn" value="IN" style="width:80px" onClick="javascript:FocusOnClick('FocusIn');"/></td>
+		      <td>&nbsp;</td>
+		      <td>&nbsp;</td>
+		      <td><input disabled type="button" name="Btn_ShiftUp" id="Btn_ShiftUp" value="Up" style="width:80px" onClick="javascript:ShiftOnClick('ShiftUp');"/></td>
+		      <td>&nbsp;</td>
+		    </tr>
+		    <tr>
+		      <td>&nbsp;</td>
+		      <td rowspan="2"><input disabled type="button" name="Btn_ShiftLeft" id="Btn_ShiftLeft" value="Left" style="width:80px" onClick="javascript:ShiftOnClick('ShiftLeft');"/></td>
+		      <td>&nbsp;</td>
+		      <td rowspan="2"><input disabled type="button" name="Btn_ShiftRight" id="Btn_ShiftRight" value="Right" style="width:80px" onClick="javascript:ShiftOnClick('ShiftRight');"/></td>
+		    </tr>
+		    <tr>
+		      <td rowspan="2"><input disabled type="button" name="Btn_ZoomOut" id="Btn_ZoomOut" value="OUT" style="width:80px" onClick="javascript:ZoomOnClick('ZoomOut');"/></td>
+		      <td rowspan="2"><input disabled type="button" name="Btn_FocusOut" id="Btn_FocusOut" value="OUT" style="width:80px" onClick="javascript:FocusOnClick('FocusOut');"/></td>
+		      <td>&nbsp;</td>
+		      <td>&nbsp;</td>
+		    </tr>
+		    <tr>
+		      <td>&nbsp;</td>
+		      <td>&nbsp;</td>
+		      <td><input disabled type="button" name="Btn_ShiftDown" id="Btn_ShiftDown" value="Down" style="width:80px" onClick="javascript:ShiftOnClick('ShiftDown');"/></td>
+		      <td>&nbsp;</td>
+		    </tr>
+		  </table>
+		</form>
+	
+	</fieldset>
+	
+</div>
+
+
+<div class="spacer">&nbsp;</div>
+<div id="footer"><!--&copy; Copyright 1999-2011 . All Rights Reserved. --></div>
+
+</div></div></div></div></div>
+
+</body>
+</html>
+

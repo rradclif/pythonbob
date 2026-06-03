@@ -1,0 +1,11 @@
+# Core Dependencies - Updated to latest stable versions as of June 2026
+# Python 3.12+ compatible - All security patches applied
+selenium>=4.44.0
+webdriver-manager>=4.0.2
+python-dotenv>=1.2.2
+
+# Security and Best Practices - Updated June 2026
+certifi>=2026.5.20   # Updated SSL certificates (May 2026)
+urllib3>=2.7.0       # Security fixes for HTTP client
+filelock>=3.20.3     # Security fixes for CVE vulnerabilities
+requests>=2.33.0     # Latest stable with security fixes

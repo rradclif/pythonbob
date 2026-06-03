@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-03-10T09:22:38.534331",
+  "outdated_packages": [
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "latest_version": "3.4.5",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "ebcdic",
+      "version": "1.1.1",
+      "latest_version": "2.0.1",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "packaging",
+      "version": "25.0",
+      "latest_version": "26.0",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.5.1",
+      "latest_version": "4.9.4",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.1",
+      "latest_version": "3.3.2",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "rich",
+      "version": "14.2.0",
+      "latest_version": "14.3.3",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "tomli",
+      "version": "2.3.0",
+      "latest_version": "2.4.0",
+      "latest_filetype": "wheel"
+    },
+    {
+      "name": "trio",
+      "version": "0.32.0",
+      "latest_version": "0.33.0",
+      "latest_filetype": "wheel"
+    }
+  ],
+  "vulnerabilities": [],
+  "pip_version": "pip 26.0.1 from /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pip (python 3.12)"
+}
