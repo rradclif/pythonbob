@@ -18,13 +18,17 @@ This document explains how to control both the left and right projectors using t
 
 The easiest way to control the projectors is using the desktop launcher scripts. Simply double-click any of these files:
 
+### Control Both Projectors (Recommended)
+- **`run_both_projectors_on.command`** - Turn on BOTH projectors simultaneously ⚡
+- **`run_both_projectors_off.command`** - Turn off BOTH projectors simultaneously ⚡
+
 ### Left Projector Controls
-- **`run_left_projector_on.command`** - Turn on the left projector
-- **`run_left_projector_off.command`** - Turn off the left projector
+- **`run_left_projector_on.command`** - Turn on the left projector only
+- **`run_left_projector_off.command`** - Turn off the left projector only
 
 ### Right Projector Controls
-- **`run_right_projector_on.command`** - Turn on the right projector
-- **`run_right_projector_off.command`** - Turn off the right projector
+- **`run_right_projector_on.command`** - Turn on the right projector only
+- **`run_right_projector_off.command`** - Turn off the right projector only
 
 ### Original Test Controls (Local HTML)
 - **`run_power_on.command`** - Test with local ProjectorPage.html
@@ -33,6 +37,15 @@ The easiest way to control the projectors is using the desktop launcher scripts.
 ## Python Scripts
 
 If you prefer to run the scripts directly with Python:
+
+### Both Projectors (Simultaneous Control)
+```bash
+# Power On Both
+python3 examples/automate_both_projectors_on.py
+
+# Power Off Both
+python3 examples/automate_both_projectors_off.py
+```
 
 ### Left Projector
 ```bash
@@ -181,17 +194,17 @@ chmod +x run_right_projector_off.command
 
 ### Controlling Both Projectors Simultaneously
 
-You can create a script to control both projectors at once:
+The framework includes built-in scripts to control both projectors at once using multi-threading for faster execution:
 
 ```bash
-#!/bin/bash
-# Turn on both projectors
-echo "Turning on both projectors..."
-python3 examples/automate_left_projector_on.py &
-python3 examples/automate_right_projector_on.py &
-wait
-echo "Both projectors should now be on!"
+# Turn on both projectors simultaneously
+python3 examples/automate_both_projectors_on.py
+
+# Turn off both projectors simultaneously
+python3 examples/automate_both_projectors_off.py
 ```
+
+These scripts use Python threading to control both projectors in parallel, making the operation much faster than running them sequentially.
 
 ### Scheduled Automation
 
@@ -227,16 +240,20 @@ crontab -e
 ```
 pythonbob/
 ├── examples/
+│   ├── automate_both_projectors_on.py     # Both projectors power on (parallel)
+│   ├── automate_both_projectors_off.py    # Both projectors power off (parallel)
 │   ├── automate_left_projector_on.py      # Left projector power on
 │   ├── automate_left_projector_off.py     # Left projector power off
 │   ├── automate_right_projector_on.py     # Right projector power on
 │   ├── automate_right_projector_off.py    # Right projector power off
 │   ├── automate_power_on.py               # Original test (local HTML)
 │   └── automate_power_off.py              # Original test (local HTML)
-├── run_left_projector_on.command          # Desktop launcher
-├── run_left_projector_off.command         # Desktop launcher
-├── run_right_projector_on.command         # Desktop launcher
-├── run_right_projector_off.command        # Desktop launcher
+├── run_both_projectors_on.command         # Desktop launcher (both)
+├── run_both_projectors_off.command        # Desktop launcher (both)
+├── run_left_projector_on.command          # Desktop launcher (left)
+├── run_left_projector_off.command         # Desktop launcher (left)
+├── run_right_projector_on.command         # Desktop launcher (right)
+├── run_right_projector_off.command        # Desktop launcher (right)
 ├── run_power_on.command                   # Original test launcher
 ├── run_power_off.command                  # Original test launcher
 ├── config.py                              # Configuration settings
@@ -256,12 +273,14 @@ For issues or questions:
 
 ### Quick Reference
 
-| Action | Left Projector | Right Projector |
-|--------|---------------|-----------------|
-| Power On | `run_left_projector_on.command` | `run_right_projector_on.command` |
-| Power Off | `run_left_projector_off.command` | `run_right_projector_off.command` |
-| URL | http://192.168.1.21/PJControl.html | http://192.168.1.20/PJControl.html |
-| IP Address | 192.168.1.21 | 192.168.1.20 |
+| Action | Both Projectors | Left Projector | Right Projector |
+|--------|----------------|---------------|-----------------|
+| Power On | `run_both_projectors_on.command` ⚡ | `run_left_projector_on.command` | `run_right_projector_on.command` |
+| Power Off | `run_both_projectors_off.command` ⚡ | `run_left_projector_off.command` | `run_right_projector_off.command` |
+| URL | Both simultaneously | http://192.168.1.21/PJControl.html | http://192.168.1.20/PJControl.html |
+| IP Address | 192.168.1.21 & .20 | 192.168.1.21 | 192.168.1.20 |
+
+⚡ = Simultaneous control using multi-threading (faster)
 
 ---
 
