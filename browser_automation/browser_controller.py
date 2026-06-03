@@ -52,6 +52,17 @@ class BrowserController:
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
         
+        # Allow access to local/private network addresses (for projector control)
+        chrome_options.add_argument("--disable-web-security")
+        chrome_options.add_argument("--allow-insecure-localhost")
+        chrome_options.add_argument("--disable-features=IsolateOrigins,site-per-process")
+        
+        # Set preferences to allow private network access
+        prefs = {
+            "profile.default_content_setting_values.insecure_private_network": 1
+        }
+        chrome_options.add_experimental_option("prefs", prefs)
+        
         # Initialize driver with automatic driver management
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service, options=chrome_options)
